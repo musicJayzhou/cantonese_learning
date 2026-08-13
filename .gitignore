@@ -1,0 +1,17 @@
+# 原始课程资料（含大量音频/PDF，不纳入版本控制）
+第01堂-*/
+
+# 备份文件
+backup/
+
+# 系统及编辑器临时文件
+Thumbs.db
+.DS_Store
+*.swp
+*.swo
+*~
+desktop.ini
+
+# IDE
+.vscode/
+.idea/

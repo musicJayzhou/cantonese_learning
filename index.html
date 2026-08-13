@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f0e1a">
+<title>廣東話第01堂 · 複習寶</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div id="toast"></div>
+<div id="fly"></div>
+<div id="coach" class="hide"></div>
+
+<header>
+  <div class="hrow">
+    <h1>廣東話複習寶<small>第一課 · 顏色 / 形狀 / 去買嘢 / 俗語 / 急口令</small></h1>
+    <div class="stat-pill" id="pillStreak" title="連續學習天數">🔥<span class="n" id="streakN">0</span></div>
+    <div class="stat-pill" id="pillStar" title="學習星星">⭐<span class="n" id="starN">0</span></div>
+    <a class="stat-pill" href="https://github.com/musicJayzhou/cantonese_learning/issues/new?template=submit-content.yml" target="_blank" rel="noopener" title="投稿新內容" style="text-decoration:none;color:inherit">📝</a>
+  </div>
+</header>
+
+<main>
+  <div class="view on" id="view-learn"></div>
+  <div class="view" id="view-cards"></div>
+  <div class="view" id="view-play"></div>
+</main>
+
+<nav>
+  <button class="on" data-v="learn"><span class="bi">📖</span>學習</button>
+  <button data-v="cards"><span class="bi">🃏</span>記憶卡</button>
+  <button data-v="play"><span class="bi">🎮</span>遊樂場</button>
+</nav>
+
+<!-- 课程数据（音频路径引用，36 KB） -->
+<script src="data/lesson01.js"></script>
+<!-- 应用逻辑（按依赖顺序加载） -->
+<script src="js/store.js"></script>
+<script src="js/confetti.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/data.js"></script>
+<script src="js/learn.js"></script>
+<script src="js/cards.js"></script>
+<script src="js/games.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
