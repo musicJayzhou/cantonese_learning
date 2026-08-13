@@ -1,22 +1,22 @@
-name: 📝 投稿新內容
-description: 提交新的詞彙、例句、俗語等學習素材
+name: 📝 投稿新内容
+description: 提交新的词汇、例句、俗语等学习素材
 title: "[投稿] "
 labels: ["submission", "pending-review"]
 body:
   - type: markdown
     attributes:
       value: |
-        感謝投稿！請填寫以下資訊，管理員審核通過後會發佈到網站。
-        粵拼（Jyutping）可參考：https://jyut.net/
+        感谢投稿！请填写以下信息，管理员审核通过后会发布到网站。
+        粤拼（Jyutping）可参考：https://jyut.net/
 
   - type: dropdown
     id: category
     attributes:
-      label: 內容類別
+      label: 内容类别
       options:
-        - 詞彙（單詞 / 詞組）
-        - 例句（句型 / 對話）
-        - 俗語 / 歇後語
+        - 词汇（单词 / 词组）
+        - 例句（句型 / 对话）
+        - 俗语 / 歇后语
         - 急口令
         - 其他
     validations:
@@ -25,18 +25,18 @@ body:
   - type: dropdown
     id: lesson
     attributes:
-      label: 歸入哪一課
+      label: 归入哪一课
       options:
-        - 第一課（顏色 / 形狀 / 去買嘢 / 俗語 / 急口令）
-        - 新課程（管理員會建立）
+        - 第一课（颜色 / 形状 / 去买嘢 / 俗语 / 急口令）
+        - 新课程（管理员会建立）
     validations:
       required: true
 
   - type: input
     id: jyut
     attributes:
-      label: 粵拼（Jyutping）
-      description: 粵語羅馬拼音，例如 hùhng-sīk
+      label: 粤拼（Jyutping）
+      description: 粤语罗马拼音，例如 hùhng-sīk
       placeholder: 例如：hùhng-sīk
     validations:
       required: true
@@ -44,7 +44,7 @@ body:
   - type: input
     id: zh
     attributes:
-      label: 繁體中文
+      label: 繁体中文
       placeholder: 例如：紅色
     validations:
       required: true
@@ -52,7 +52,7 @@ body:
   - type: input
     id: en
     attributes:
-      label: 英文 / 普通話對照
+      label: 英文 / 普通话对照
       placeholder: 例如：Red
     validations:
       required: true
@@ -60,30 +60,30 @@ body:
   - type: textarea
     id: scene
     attributes:
-      label: 使用情景（可選）
-      description: 俗語 / 例句適用，描述甚麼場合會用到
+      label: 使用情景（可选）
+      description: 俗语 / 例句适用，描述什么场合会用到
       placeholder: 情景：……
 
   - type: textarea
     id: example
     attributes:
-      label: 例句（可選）
-      placeholder: 例句……——解釋……
+      label: 例句（可选）
+      placeholder: 例句……——解释……
 
   - type: textarea
     id: note
     attributes:
-      label: 補充說明（可選）
-      placeholder: 字面意思、文化背景、語法要點等
+      label: 补充说明（可选）
+      placeholder: 字面意思、文化背景、语法要点等
 
   - type: input
     id: audio
     attributes:
-      label: 音頻連結（可選）
-      description: 如有錄音，可提供下載連結（Google Drive、微信文件等）
+      label: 音频链接（可选）
+      description: 如有录音，可提供下载链接（Google Drive、微信文件等）
       placeholder: https://...
 
   - type: textarea
     id: remarks
     attributes:
-      label: 其他備註（可選）
+      label: 其他备注（可选）

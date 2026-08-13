@@ -1,77 +1,77 @@
-# 內容投稿與發佈流程
+# 内容投稿与发布流程
 
-## 概覽
+## 概览
 
 ```
-受信任用戶 → 在網站點「📝」投稿 → GitHub Issue 提交
-    → 管理員收到郵件通知 → 審核內容
-    → 編輯 data/lessonXX.js → git push → 網站自動更新
-    → 關閉 Issue
+受信任用户 → 在网站点「📝」投稿 → GitHub Issue 提交
+    → 管理员收到邮件通知 → 审核内容
+    → 编辑 data/lessonXX.js → git push → 网站自动更新
+    → 关闭 Issue
 ```
 
 ## 一、投稿者操作
 
-1. 打開網站 `https://musicjayzhou.github.io/cantonese_learning/`
-2. 點擊頁面頂部右上角的 **📝** 圖標
-3. 在 GitHub Issue 頁面填寫表單（粵拼、繁體中文、英文等）
-4. 點擊 **Submit new issue**
+1. 打开网站 `https://musicjayzhou.github.io/cantonese_learning/`
+2. 点击页面顶部右上角的 **📝** 图标
+3. 在 GitHub Issue 页面填写表单（粤拼、繁体中文、英文等）
+4. 点击 **Submit new issue**
 
-> 投稿者需有免費 GitHub 帳號。音頻為可選項，可附上下載連結。
+> 投稿者需有免费 GitHub 账号。音频为可选项，可附上下载链接。
 
-## 二、管理員審核
+## 二、管理员审核
 
-1. 收到 GitHub 的 Issue 通知郵件
-2. 打開 Issue，審核內容是否準確
-3. 如需修改，直接在 Issue 中回覆討論
-4. 審核通過 → 進入發佈步驟
+1. 收到 GitHub 的 Issue 通知邮件
+2. 打开 Issue，审核内容是否准确
+3. 如需修改，直接在 Issue 中回复讨论
+4. 审核通过 → 进入发布步骤
 
-## 三、發佈到網站
+## 三、发布到网站
 
-### 情況 A：向現有課程添加內容
+### 情况 A：向现有课程添加内容
 
-以新增一條顏色詞彙為例：
+以新增一条颜色词汇为例：
 
-1. 打開 `data/lesson01.js`
-2. 找到對應 section（如 `colour`）的 `items` 陣列
-3. 在末尾添加新條目：
+1. 打开 `data/lesson01.js`
+2. 找到对应 section（如 `colour`）的 `items` 数组
+3. 在末尾添加新条目：
 
 ```javascript
 {
-  "jyut": "投稿者填的粵拼",
+  "jyut": "投稿者填的粤拼",
   "zh": "投稿者填的中文",
   "en": "投稿者填的英文",
-  "audio": "audio/lesson01/colour/items/20.mp3"  // 如有音頻則填路徑，無則刪除此行
+  "audio": "audio/lesson01/colour/items/20.mp3"  // 如有音频则填路径，无则删除此行
 }
 ```
 
-4. 如有音頻文件，將文件放到 `audio/lesson01/colour/items/` 目錄
+4. 如有音频文件，将文件放到 `audio/lesson01/colour/items/` 目录
 5. 保存文件
 
-### 情況 B：創建新課程
+### 情况 B：创建新课程
 
-1. 創建新的數據文件 `data/lesson02.js`，結構參考 `lesson01.js`
+1. 创建新的数据文件 `data/lesson02.js`，结构参考 `lesson01.js`
 2. 在 `index.html` 中添加 `<script src="data/lesson02.js"></script>`
 3. 更新 `js/data.js` 中的 `SEC_TABS` 等配置
 
-### 推送發佈
+### 推送发布
 
 ```powershell
 cd D:\Workspace\Cantonese
 git add .
-git commit -m "新增內容：<簡述>"
+git commit -m "新增内容：<简述>"
 git push
 ```
 
-推送後 1~2 分鐘，GitHub Pages 會自動重新構建，網站即更新。
+推送后 1~2 分钟，GitHub Pages 会自动重新构建，网站即更新。
 
-## 四、完成後
+## 四、完成后
 
-1. 回到 GitHub Issue，回覆「已發佈 ✅」
-2. 關閉 Issue
+1. 回到 GitHub Issue，回复「已发布 ✅」
+2. 关闭 Issue
 
-## 注意事項
+## 注意事项
 
-- 粵拼（Jyutping）格式請參考 https://jyut.net/
-- 繁體中文優先（與現有內容一致）
-- 音頻文件命名：按目錄中已有序號遞增
-- 如投稿內容有誤或質量不佳，直接在 Issue 中說明原因並關閉
+- 粤拼（Jyutping）格式请参考 https://jyut.net/
+- 繁体中文优先（与现有内容一致）
+- 音频文件命名：按目录中已有序号递增
+- 如投稿内容有误或质量不佳，直接在 Issue 中说明原因并关闭

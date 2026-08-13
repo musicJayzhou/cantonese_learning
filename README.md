@@ -1,18 +1,18 @@
-# 廣東話複習寶 🎯
+# 广东话复习宝 🎯
 
-粵語中級學習工具，涵蓋詞彙、句型、俗語、急口令等多種練習模式。
+粤语中级学习工具，涵盖词汇、句型、俗语、急口令等多种练习模式。
 
 ## 功能
 
-- **學習** — 詞彙卡片、句型對話、俗語講解、急口令挑戰、聽力理解
-- **記憶卡** — 閃卡翻面、分類篩選、掌握 / 加強標記
-- **遊樂場** — 角色扮演、聽寫、句子重組、閃電戰、問答接龍
+- **学习** — 词汇卡片、句型对话、俗语讲解、急口令挑战、听力理解
+- **记忆卡** — 闪卡翻面、分类筛选、掌握 / 加强标记
+- **游乐场** — 角色扮演、听写、句子重组、闪电战、问答接龙
 
-學習進度（星星、連擊天數、詞彙標記）自動保存在瀏覽器 LocalStorage。
+学习进度（星星、连击天数、词汇标记）自动保存在浏览器 LocalStorage。
 
-## 本地運行
+## 本地运行
 
-純靜態網站，無需安裝任何依賴。直接用瀏覽器打開 `index.html` 即可，或用任意靜態伺服器：
+纯静态网站，无需安装任何依赖。直接用浏览器打开 `index.html` 即可，或用任意静态服务器：
 
 ```bash
 # Python
@@ -22,17 +22,17 @@ python -m http.server 8000
 npx serve
 ```
 
-然後訪問 `http://localhost:8000`。
+然后访问 `http://localhost:8000`。
 
-## 貢獻內容
+## 贡献内容
 
-歡迎提交新的詞彙、俗語、例句等學習素材！請通過[投稿表單](https://github.com/musicJayzhou/cantonese_learning/issues/new?template=submit-content.yml)填寫，管理員審核後會發佈到網站。
+欢迎提交新的词汇、俗语、例句等学习素材！请通过[投稿表单](https://github.com/musicJayzhou/cantonese_learning/issues/new?template=submit-content.yml)填写，管理员审核后会发布到网站。
 
-## 目錄結構
+## 目录结构
 
-詳見 [STRUCTURE.md](STRUCTURE.md)。
+详见 [STRUCTURE.md](STRUCTURE.md)。
 
-## 技術棧
+## 技术栈
 
-- 原生 HTML / CSS / JavaScript（無框架、無構建步驟）
-- 部署於 GitHub Pages
+- 原生 HTML / CSS / JavaScript（无框架、无构建步骤）
+- 部署于 GitHub Pages
