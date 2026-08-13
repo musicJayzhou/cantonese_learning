@@ -7,7 +7,7 @@ const $$ = s => [...document.querySelectorAll(s)];
 /* LocalStorage 持久化 */
 const store = {
   get(k, d){ try{ return JSON.parse(localStorage.getItem('cantonese_'+k)) ?? d; }catch(e){ return d; } },
-  set(k, v){ localStorage.setItem('cantonese_'+k, JSON.stringify(v)); }
+  set(k, v){ try{ localStorage.setItem('cantonese_'+k, JSON.stringify(v)); }catch(e){} }
 };
 let stars = store.get('stars', 0);
 let marks = store.get('marks', {});   // id -> 'known' | 'hard'

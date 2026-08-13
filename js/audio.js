@@ -1,6 +1,17 @@
 "use strict";
 /* ================= audio 音频播放 ================= */
 let curAudio = null, curBtn = null;
+
+/* iOS Safari: 首次交互时解锁音频引擎，避免后续 setTimeout 自动播放被拦截 */
+let _au = false;
+function _unlockAudio(){
+  if(_au) return; _au = true;
+  const a = new Audio();
+  a.muted = true;
+  a.play().then(()=>{ a.pause(); }).catch(()=>{});
+}
+document.addEventListener('click', _unlockAudio, {once:true});
+document.addEventListener('touchstart', _unlockAudio, {once:true, passive:true});
 function play(src, btn){
   if(!src) return;
   if(curAudio){ curAudio.pause(); curAudio = null; }

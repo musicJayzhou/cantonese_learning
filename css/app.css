@@ -13,7 +13,7 @@ button{font-family:inherit;border:none;cursor:pointer;color:inherit;background:n
 ::-webkit-scrollbar{width:0;height:0}
 
 /* ---------- header ---------- */
-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+header{position:sticky;top:0;z-index:50;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
   background:rgba(15,14,26,.78);border-bottom:1px solid var(--line);
   padding:calc(env(safe-area-inset-top) + 10px) 16px 10px}
 .hrow{display:flex;align-items:center;gap:10px}
@@ -184,7 +184,7 @@ main{padding:14px 14px 0;max-width:640px;margin:0 auto}
 
 /* ---------- bottom nav ---------- */
 nav{position:fixed;bottom:0;left:0;right:0;z-index:50;display:flex;
-  background:rgba(23,21,38,.92);backdrop-filter:blur(16px);border-top:1px solid var(--line);
+  background:rgba(23,21,38,.92);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--line);
   padding-bottom:env(safe-area-inset-bottom)}
 nav button{flex:1;padding:10px 0 12px;display:flex;flex-direction:column;align-items:center;gap:3px;
   font-size:11px;color:var(--dim);font-weight:700;transition:.2s}
@@ -201,7 +201,7 @@ nav button.on .bi{transform:translateY(-2px) scale(1.15)}
   opacity:0;transition:transform .7s cubic-bezier(.3,-0.2,.4,1),opacity .7s}
 @keyframes popin{0%{transform:scale(0) rotate(-30deg);opacity:0}60%{transform:scale(1.25) rotate(8deg);opacity:1}100%{transform:scale(1) rotate(0)}}
 .pop-in{animation:popin .45s cubic-bezier(.2,.8,.3,1.2)}
-#coach{position:fixed;inset:0;z-index:200;background:rgba(10,9,20,.82);backdrop-filter:blur(6px);
+#coach{position:fixed;inset:0;z-index:200;background:rgba(10,9,20,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   display:flex;align-items:center;justify-content:center;padding:24px}
 #coach.hide{display:none}
 .coach-box{background:linear-gradient(160deg,#26224a,#191628);border:1px solid var(--line);border-radius:26px;
