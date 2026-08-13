@@ -144,5 +144,5 @@ document.addEventListener('touchend', ()=>clearTimeout(pressTimer));
 document.addEventListener('touchmove', ()=>clearTimeout(pressTimer));
 document.addEventListener('contextmenu', e=>{
   const c = e.target.closest('[data-mkid]'); if(!c) return;
-  e.preventDefault(); cycleMark(c);
+  e.preventDefault(); clearTimeout(pressTimer); cycleMark(c);
 });
