@@ -97,7 +97,7 @@ main{padding:14px 14px 0;max-width:640px;margin:0 auto}
 
 /* ---------- flashcard ---------- */
 .fc-wrap{perspective:1200px;margin-bottom:14px;max-width:380px;margin-left:auto;margin-right:auto}
-.fc{position:relative;width:100%;min-height:200px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.8,.3,1.1);
+.fc{position:relative;width:100%;min-height:290px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.8,.3,1.1);
   touch-action:manipulation;user-select:none;-webkit-user-select:none}
 .fc.flip{transform:rotateY(180deg)}
 .fc .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;
@@ -329,7 +329,7 @@ nav button.on .bi{transform:translateY(-2px) scale(1.15)}
   .srow .jy { font-size: 13px }
 
   /* 記憶卡 */
-  .fc { min-height: 220px }
+  .fc { min-height: 310px }
   .fc .big { font-size: 30px }
 
   /* 測驗 */
@@ -394,7 +394,7 @@ nav button.on .bi{transform:translateY(-2px) scale(1.15)}
 
   /* 記憶卡 */
   .fc-wrap { max-width: 420px }
-  .fc { min-height: 250px }
+  .fc { min-height: 330px }
   .fc .big { font-size: 34px }
   .fc .big-jy { font-size: 20px }
 
@@ -419,4 +419,68 @@ nav button.on .bi{transform:translateY(-2px) scale(1.15)}
 
   /* 引導層 */
   .coach-box { max-width: 440px }
+}
+
+/* ================================================================
+   多课次 & 图文卡（第02/03堂新增）
+   ================================================================ */
+
+/* 课次切换（学习页顶部，层级高于主题 tab） */
+.lesson-tabs{margin:2px 2px 12px;padding:3px;background:rgba(23,21,38,.6);
+  border:1px solid var(--line);border-radius:999px}
+.lesson-tabs .tab{flex:1;text-align:center;justify-content:center}
+.lesson-tabs .tab.on{background:linear-gradient(135deg,var(--acc),#ff9f1c);color:#221;
+  box-shadow:0 4px 14px rgba(255,209,102,.35)}
+
+/* 练习范围多选（记忆卡/游乐场） */
+.prac-row{margin-bottom:8px}
+.prac-row .tab.on{background:linear-gradient(135deg,var(--good),#22b07d);color:#06281c;
+  box-shadow:0 4px 14px rgba(61,220,151,.3)}
+.prac-row .prac-follow.on{background:linear-gradient(135deg,var(--acc2),#5a3ee0);color:#fff}
+.pg-scope{font-size:12px;color:var(--dim);margin:0 2px 12px;font-weight:600}
+.pg-game.dim{opacity:.55}
+.pg-game.dim .gi{filter:grayscale(.6)}
+
+/* 图文词汇卡 */
+.card .cimg{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;
+  margin:-4px 0 8px;background:#fff;display:block}
+.card.has-img{padding:12px 8px 12px}
+.card.has-img .zh{font-size:17px}
+.card.has-img .jy{font-size:11px}
+.card .note{font-size:10px;color:var(--info);margin-top:4px;line-height:1.4}
+
+/* 变体发音 chips（卡片内/对话行内） */
+.vchips{margin-top:5px}
+.vchip{display:inline-block;background:var(--card2);border:1px solid var(--line);
+  border-radius:99px;padding:3px 9px;font-size:10px;color:var(--acc);
+  margin:3px 3px 0;font-weight:700;cursor:pointer;transition:.15s}
+.vchip:active{transform:scale(.92)}
+.vchip.playing{background:linear-gradient(135deg,var(--acc),#ff9f1c);color:#221;border-color:transparent}
+
+/* 记忆卡配图 */
+.fc .fimg{width:110px;height:110px;object-fit:cover;border-radius:16px;
+  margin-bottom:12px;background:#fff}
+
+/* 文法卡 */
+.g-card{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:13px;margin-bottom:10px;align-items:flex-start}
+.g-card .g-no{width:26px;height:26px;border-radius:8px;flex:none;
+  background:linear-gradient(135deg,var(--info),#3a86ff);display:grid;place-items:center;
+  font-weight:900;font-size:12px;color:#06222e}
+.g-card .g-tx{flex:1;min-width:0}
+.g-card .zh{font-size:15px;font-weight:700;line-height:1.5}
+.g-card .jy{font-size:12px;color:var(--acc);margin-top:3px;line-height:1.4;word-break:break-word}
+.g-card .mand{font-size:11px;color:var(--dim);margin-top:3px}
+
+@media (hover: hover) {
+  .vchip:hover { border-color: var(--acc2); }
+}
+
+@media (min-width: 1024px) {
+  /* 图文卡在桌面端保持紧凑 */
+  .card.has-img .zh { font-size: 19px }
+  /* 文法卡双列 */
+  .grammar-cols { column-count: 2; column-gap: 16px }
+  .g-card { break-inside: avoid }
+  .fc .fimg { width: 130px; height: 130px }
 }

@@ -1,17 +1,29 @@
 "use strict";
-/* ================= 出題詞池（遊樂場共用） ================= */
-function quizPoolItems(){
-  // 有中英对照的词条出题
-  const out = [];
-  DATA.sections.forEach(sec=>{
-    if(sec.id==='colour'||sec.id==='shape') sec.items.forEach(it=>out.push({zh:it.zh, jyut:it.jyut, en:it.en, audio:it.audio, tag:sec.title}));
-    if(sec.id==='lesson1'){ sec.vocab.forEach(it=>out.push({zh:it.zh, jyut:it.jyut, en:it.en, tag:'生字'})); sec.supp.forEach(it=>out.push({zh:it.zh, jyut:it.jyut, en:it.en, tag:'傢俬'})); }
-    if(sec.id==='tongue') sec.words.forEach(it=>out.push({zh:it.zh, jyut:it.jyut, en:it.en, audio:it.audio, tag:'急口令'}));
+/* ================= 出題池（遊樂場共用，跟隨課次多選） ================= */
+let QPOOL = [], QPOOL_AUD = [], PPAIRS = [], PSEG = [];
+function rebuildQuizPools(){
+  const cs = pracCourses();
+  QPOOL = []; PPAIRS = []; PSEG = [];
+  cs.forEach(course=>{
+    (course.sections||[]).forEach(sec=>{
+      const pushQ = (it, tag) => {
+        if(it.zh && it.jyut && it.en) QPOOL.push({zh:it.zh, jyut:it.jyut, en:it.en, audio:it.audio||'', tag});
+      };
+      if(sec.type==='vocab'){
+        const items = sec.groups ? sec.groups.flatMap(g=>g.items) : (sec.items||[]);
+        items.forEach(it=>pushQ(it, sec.title));
+      }
+      if(sec.type==='dialog'){
+        (sec.vocab||[]).forEach(it=>pushQ(it, '生字'));
+        (sec.supp||[]).forEach(it=>pushQ(it, '傢俬'));
+      }
+      if(sec.type==='tongue') sec.words.forEach(it=>pushQ(it, sec.title));
+    });
+    PPAIRS.push(...(course.pairs||[]));
+    PSEG.push(...(course.seg||[]));
   });
-  return out.filter(x=>x.zh && x.jyut && x.en);
+  QPOOL_AUD = QPOOL.filter(x=>x.audio);
 }
-const QPOOL = quizPoolItems();
-const QPOOL_AUD = QPOOL.filter(x=>x.audio);   // 有音频的词才可出听音题
 function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
 /* ================= playground 遊樂場 ================= */
@@ -26,16 +38,33 @@ let hiScores = store.get('hiScores', {});
 let playGame = null;
 let blitzTimer = null;
 
+/* 当前范围下游戏是否有素材 */
+function pgHasMaterial(id){
+  if(id==='roleplay'||id==='chain') return PPAIRS.length>0;
+  if(id==='builder') return PSEG.length>0;
+  return QPOOL_AUD.length>=4;
+}
+function pgNoMaterialHTML(g){
+  return `<div class="q-result q-card"><div style="font-size:44px">🏜️</div>
+    <div class="msg">而家嘅出題範圍冇「${g.t}」素材</div>
+    <div style="font-size:13px;color:var(--dim);margin-bottom:18px;line-height:1.7">試吓喺上面加選其他堂，或者去玩「👂 聽寫挑戰」練詞彙！</div>
+    <div class="rp-ctl"><button class="primary" onclick="pgQuit()">← 返回遊樂場</button></div></div>`;
+}
+
 function renderPlay(){
   const v = $('#view-play');
   if(!playGame){
-    v.innerHTML = `<div class="sec-head"><span class="ic">🎮</span><h2>遊樂場</h2><span class="jp">邊玩邊學</span></div>
-    <div class="pg-menu">` + GAMES.map(g=>{
+    const scopeNames = pracCourses().map(c=>c.meta.lesson).join('＋');
+    v.innerHTML = `<div class="sec-head"><span class="ic">🎮</span><h2>遊樂場</h2><span class="jp">邊玩邊學</span></div>`
+    + pracChipsHTML()
+    + `<div class="pg-scope">出題範圍：${scopeNames}${pracIsFollow()?'（跟住學習頁）':''}</div>`
+    + `<div class="pg-menu">` + GAMES.map(g=>{
       const hi = hiScores[g.id];
-      return `<button class="pg-game" onclick="pgStart('${g.id}')">
+      const ok = pgHasMaterial(g.id);
+      return `<button class="pg-game ${ok?'':'dim'}" onclick="pgStart('${g.id}')">
         <div class="gi">${g.ic}</div>
         <div class="gt"><b>${g.t}</b><small>${g.d}</small></div>
-        ${hi!==undefined?`<div class="hi">🏅 ${hi}</div>`:''}
+        ${ok ? (hi!==undefined?`<div class="hi">🏅 ${hi}</div>`:'') : '<div class="hi">冇素材</div>'}
       </button>`;
     }).join('') + `</div>`;
     return;
@@ -43,6 +72,7 @@ function renderPlay(){
   const g = GAMES.find(x=>x.id===playGame);
   let h = `<button class="pg-back" onclick="pgQuit()">← 返回遊樂場</button>
     <div class="sec-head"><span class="ic">${g.ic}</span><h2>${g.t}</h2></div>`;
+  if(!pgHasMaterial(playGame)){ v.innerHTML = h + pgNoMaterialHTML(g); return; }
   if(playGame==='roleplay') h += rpHTML();
   else if(playGame==='dictation') h += dtHTML();
   else if(playGame==='builder') h += bdHTML();
@@ -50,14 +80,18 @@ function renderPlay(){
   else if(playGame==='chain') h += chHTML();
   v.innerHTML = h;
 }
-window.pgStart = id => { playGame = id; pgInitGame(); renderPlay(); pgAfterRender(); };
+window.pgStart = id => {
+  playGame = id;
+  if(!pgHasMaterial(id)){ renderPlay(); return; }
+  pgInitGame(); renderPlay(); pgAfterRender();
+};
 window.pgQuit = () => { stopBlitz(); playGame = null; renderPlay(); };
 function pgInitGame(){
-  if(playGame==='roleplay') rp = {order: shuffle(DATA.pairs.slice()), i:0, phase:'q', done:0};
+  if(playGame==='roleplay') rp = {order: shuffle(PPAIRS.slice()), i:0, phase:'q', done:0};
   if(playGame==='dictation') dt = {list: shuffle(QPOOL_AUD.slice()).slice(0,8), i:0, score:0, answered:false};
-  if(playGame==='builder') bd = {list: shuffle(DATA.seg.slice()).slice(0,6), i:0, score:0, picked:[], done:false};
+  if(playGame==='builder') bd = {list: shuffle(PSEG.slice()).slice(0,6), i:0, score:0, picked:[], done:false};
   if(playGame==='blitz') bz = {left:60, score:0, combo:0, best:0, over:false, q:null, lock:false};
-  if(playGame==='chain') ch = {list: shuffle(DATA.pairs.slice()).slice(0,6), i:0, score:0, answered:false};
+  if(playGame==='chain') ch = {list: shuffle(PPAIRS.slice()).slice(0,6), i:0, score:0, answered:false};
 }
 function pgAfterRender(){
   if(playGame==='roleplay') setTimeout(()=>{ if(rp && rp.i < rp.order.length) play(rp.order[rp.i].qa); }, 400);
@@ -75,10 +109,10 @@ function saveHi(id, score){
 /* ---------- 🎭 roleplay ---------- */
 let rp = null;
 function rpHTML(){
-  if(rp.i >= rp.order.length){
-    saveHi('roleplay', rp.done);
+  if(!rp || rp.i >= rp.order.length){
+    if(rp) saveHi('roleplay', rp.done);
     return `<div class="q-result q-card"><div style="font-size:44px">🎭</div>
-      <div class="msg">完成 ${rp.done} 組對話！開口講咗未？</div>
+      <div class="msg">完成 ${rp?rp.done:0} 組對話！開口講咗未？</div>
       <div class="rp-ctl"><button class="primary" onclick="pgStart('roleplay')">🔁 再演一次</button></div></div>`;
   }
   const p = rp.order[rp.i];
@@ -147,6 +181,17 @@ window.dtAnswer = (btn, i) => {
 
 /* ---------- 🧩 builder ---------- */
 let bd = null;
+/* 原句音频：先查问答对，再查急口令完整句 */
+function bdAudioOf(s){
+  const pair = PPAIRS.find(x=>x.qzh===s.zh || x.azh===s.zh);
+  if(pair) return pair.qzh===s.zh ? pair.qa : pair.aa;
+  for(const c of pracCourses()){
+    for(const sec of (c.sections||[])){
+      if(sec.type==='tongue' && sec.full && sec.full.zh===s.zh && sec.full.audio) return sec.full.audio;
+    }
+  }
+  return '';
+}
 function bdHTML(){
   if(bd.i >= bd.list.length){
     const newHi = saveHi('builder', bd.score);
@@ -159,8 +204,7 @@ function bdHTML(){
   }
   const s = bd.list[bd.i];
   if(!bd.cands) bd.cands = shuffle(s.parts.map((p,idx)=>({p, idx})));
-  const pair = DATA.pairs.find(x=>x.qzh===s.zh || x.azh===s.zh);
-  const audio = pair ? (pair.qzh===s.zh ? pair.qa : pair.aa) : (s.zh==='入實驗室撳緊急掣' ? DATA.sections.find(x=>x.id==='tongue').full.audio : '');
+  const audio = bdAudioOf(s);
   return `<div class="q-top"><span>句子 ${bd.i+1} / ${bd.list.length}</span><span>得分 <b style="color:var(--acc)">${bd.score}</b></span></div>
     <div class="q-card">
       <div class="q-main" style="font-size:22px">${esc(s.zh)}</div>
@@ -271,9 +315,9 @@ function chHTML(){
       <div class="rp-ctl"><button class="primary" onclick="pgStart('chain')">🔁 再接一次</button></div></div>`;
   }
   const p = ch.list[ch.i];
-  const distract = shuffle(DATA.pairs.filter(x=>x.azh!==p.azh)).slice(0,3);
+  const distract = shuffle(PPAIRS.filter(x=>x.azh!==p.azh)).slice(0,3);
   ch.opts = shuffle([p, ...distract]);
-  return `<div class="q-top"><span>接龍 ${ch.i+1} / ${ch.list.length}</span><span>得分 <b style="color:var(--acc)">${ch.score}</b></span></div>
+  return `<div class="q-top"><span>接龍 ${ch.i+1} / ${ch.list.length} 題</span><span>得分 <b style="color:var(--acc)">${ch.score}</b></span></div>
     <div class="chain-q">
       <button class="pi" data-audio="${p.qa}">▶</button>
       <div><b>聽問句 👂</b><div style="font-size:12px;color:var(--dim);margin-top:3px">揀出對應嘅答句</div></div>

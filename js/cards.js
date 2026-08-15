@@ -1,52 +1,71 @@
 "use strict";
 /* ================= 记忆卡 (flashcards) ================= */
 let fcPool = [], fcIdx = 0, fcSec = 'all';
-function allFlashItems(){
+
+/* 汇总指定课程的全部闪卡条目；mk 为与学习页共用的标记 ID */
+function flashItemsOf(courses){
   const out = [];
-  const push = (sec, it) => out.push({sec, zh:it.zh, jyut:it.jyut, en:it.en||'', audio:it.audio||''});
-  DATA.sections.forEach(sec=>{
-    if(sec.id==='colour'||sec.id==='shape'){
-      sec.items.forEach(it=>push(sec.title,it));
-      sec.sentences.forEach(s=>push(sec.title+'·句', {zh:s.zh, jyut:s.jyut, en:s.en, audio:s.audio}));
-    }
-    if(sec.id==='lesson1'){
-      sec.vocab.forEach(it=>push('第一課·生字',it));
-      sec.classifiers.forEach(it=>push('第一課·量詞',it));
-      sec.supp.forEach(it=>push('第一課·傢俬',it));
-    }
-    if(sec.id==='suyu') sec.items.forEach(it=>push('俗語', {zh:it.zh, jyut:it.jyut, en:it.scene, audio:it.audio}));
-    if(sec.id==='tongue') sec.words.forEach(it=>push('急口令',it));
+  const push = (cid, secTitle, secKey, it) => out.push({
+    cid, sec: secTitle, mk: mkid(cid, secKey, it.zh),
+    zh: it.zh, jyut: it.jyut, en: it.en || '', audio: it.audio || '', img: it.img || ''
+  });
+  courses.forEach(course=>{
+    const cid = course.meta.id;
+    (course.sections||[]).forEach(sec=>{
+      if(sec.type==='vocab'){
+        const items = sec.groups ? sec.groups.flatMap(g=>g.items) : (sec.items||[]);
+        items.forEach(it=>push(cid, sec.title, sec.id, it));
+        (sec.sentences||[]).forEach(s=>push(cid, sec.title+'·句', sec.title+'·句', s));
+      }
+      if(sec.type==='dialog'){
+        (sec.vocab||[]).forEach(it=>push(cid, sec.title, cid==='lesson01'?'lesson1-v':sec.id+'-v', it));
+        (sec.classifiers||[]).forEach(it=>push(cid, '第一課·量詞', 'lesson1-c', it));
+        (sec.supp||[]).forEach(it=>push(cid, '第一課·傢俬', 'lesson1-s', it));
+      }
+      if(sec.type==='suyu') sec.items.forEach(it=>push(cid, sec.title, '俗語', {zh:it.zh, jyut:it.jyut, en:it.scene, audio:it.audio}));
+      if(sec.type==='tongue') sec.words.forEach(it=>push(cid, sec.title, cid==='lesson01'?'急口令':sec.id, it));
+    });
   });
   return out;
 }
-const FC_ALL = allFlashItems();
-const FC_SECS = ['all','顏色 Colour','形狀 Shape','第一課·生字','第一課·量詞','第一課·傢俬','俗語'];
-/* 记忆卡/学习页标记共用的 ID 前缀映射 */
-const MARK_PREFIX = {'顏色 Colour':'colour','形狀 Shape':'shape','第一課·生字':'lesson1-v','第一課·量詞':'lesson1-c','第一課·傢俬':'lesson1-s'};
+
+/* 当前练习范围内的条目与分类 */
+function scopedFlashItems(){ return flashItemsOf(pracCourses()); }
+function fcSecsOf(items){
+  const secs = [...new Set(items.map(x=>x.sec))];
+  return ['all', ...secs];
+}
 
 function fcBuildPool(){
-  let pool = fcSec==='all' ? FC_ALL.slice() : FC_ALL.filter(x=>x.sec===fcSec);
-  // 优先出"需加强"的卡（按学习页共用的标记 ID 判断）
+  const all = scopedFlashItems();
+  let pool = fcSec==='all' ? all.slice() : all.filter(x=>x.sec===fcSec);
+  // 优先出"需加强"的卡（与学习页共用的标记 ID）
   pool.sort((a,b)=>{
-    const pa = (MARK_PREFIX[a.sec]||a.sec)+'|'+a.zh, pb = (MARK_PREFIX[b.sec]||b.sec)+'|'+b.zh;
-    const ma = marks[pa]==='hard'?-1:0, mb = marks[pb]==='hard'?-1:0;
+    const ma = marks[a.mk]==='hard'?-1:0, mb = marks[b.mk]==='hard'?-1:0;
     return ma-mb || Math.random()-.5;
   });
   fcPool = pool; fcIdx = 0;
 }
 function renderCards(){
   const v = $('#view-cards');
-  let h = `<div class="fc-sec-row">` + FC_SECS.map(s=>`<button class="tab ${fcSec===s?'on':''}" onclick="fcSetSec('${s}')">${s==='all'?'🌈 全部':s}</button>`).join('') + `</div>`;
+  const items = scopedFlashItems();
+  const secs = fcSecsOf(items);
+  if(fcSec!=='all' && !secs.includes(fcSec)) fcSec = 'all';
+  let h = pracChipsHTML();
+  h += `<div class="fc-sec-row">` + secs.map(s=>`<button class="tab ${fcSec===s?'on':''}" onclick="fcSetSec('${s.replace(/'/g,"\\'")}')">${s==='all'?'🌈 全部':esc(s)}</button>`).join('') + `</div>`;
+  if(!fcPool.length){ fcBuildPool(); }
   if(!fcPool.length){ h += `<div class="empty-tip">呢個分類冇卡片 😅</div>`; v.innerHTML=h; return; }
   const c = fcPool[fcIdx];
   h += `<div class="fc-nav"><button onclick="fcMove(-1)">← 上一張</button><span>${fcIdx+1} / ${fcPool.length} · ${esc(c.sec)}</span><button onclick="fcMove(1)">下一張 →</button></div>`;
   h += `<div class="fc-wrap"><div class="fc" id="fcCard" onclick="this.classList.toggle('flip')">
     <div class="face front">
+      ${c.img?`<img class="fimg" src="${c.img}" alt="">`:''}
       <div class="big">${esc(c.zh)}</div>
       ${c.audio?`<button type="button" class="chip fc-audio" data-audio="${c.audio}" onclick="event.stopPropagation()">🔊 聽發音</button>`:''}
       <div class="hint">👆 點擊卡面翻面睇答案</div>
     </div>
     <div class="face back">
+      ${c.img?`<img class="fimg" src="${c.img}" alt="">`:''}
       <div class="big-jy">${esc(c.jyut)}</div>
       <div class="en-line">${esc(c.en)}</div>
       ${c.audio?`<button type="button" class="chip fc-audio" data-audio="${c.audio}" onclick="event.stopPropagation()">🔊 播放發音</button>`:`<div class="hint">（呢類詞暫無單獨音頻）</div>`}
@@ -73,10 +92,9 @@ window.fcSetSec = s => { fcSec = s; fcBuildPool(); renderCards(); };
 window.fcMove = d => { fcIdx = (fcIdx + d + fcPool.length) % fcPool.length; renderCards(); };
 window.fcMark = (m, ev) => {
   const c = fcPool[fcIdx];
-  const id = (MARK_PREFIX[c.sec] || c.sec) + '|' + c.zh;
   const el = ev && ev.currentTarget;
-  if(m==='known'){ marks[id]='known'; addStars(1, el); toast('✅ 已掌握 +1⭐'); }
-  else { marks[id]='hard'; toast('❗ 加入重點複習'); }
+  if(m==='known'){ marks[c.mk]='known'; addStars(1, el); toast('✅ 已掌握 +1⭐'); }
+  else { marks[c.mk]='hard'; toast('❗ 加入重點複習'); }
   store.set('marks', marks);
   fcMove(1);
 };
