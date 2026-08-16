@@ -188,6 +188,8 @@ function renderLearn(){
   }
   v.innerHTML = h;
   renderSecTabs();
+  /* 后台预载本区块短音频（未解锁时静默跳过，解锁时会自动补一次） */
+  if(window.preloadSectionAudio) preloadSectionAudio();
 }
 function renderSecTabs(){
   const el = $('#secTabs');

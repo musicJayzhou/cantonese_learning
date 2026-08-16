@@ -472,6 +472,25 @@ nav button.on .bi{transform:translateY(-2px) scale(1.15)}
 .g-card .jy{font-size:12px;color:var(--acc);margin-top:3px;line-height:1.4;word-break:break-word}
 .g-card .mand{font-size:11px;color:var(--dim);margin-top:3px}
 
+/* ================================================================
+   音频加载/播放状态反馈
+   点击瞬间 → .loading（信息色脉冲，等网络）；出声 → .playing
+   ================================================================ */
+@keyframes loadpulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(76,201,240,.45);border-color:var(--info)}
+  50%{box-shadow:0 0 0 9px rgba(76,201,240,0);border-color:var(--info)}
+}
+.card.loading,.pi.loading,.big-play.loading,.tt-word.loading,
+.speed-btn.loading,.vchip.loading,.chip.loading,.fc-audio.loading{
+  animation:loadpulse 1s ease-out infinite;border-color:var(--info)}
+
+/* 各按钮的播放中样式（原先只有 .card/.pi/.fc-audio 有） */
+.big-play.playing{border-color:var(--acc)}
+.big-play.playing .pi{background:linear-gradient(135deg,var(--acc),#ff9f1c);animation:pulse 1s infinite}
+.tt-word.playing{border-color:var(--acc);animation:pulse 1s infinite}
+.speed-btn.playing{border-color:var(--acc);color:var(--acc);animation:pulse 1s infinite}
+.chip.playing{border-color:var(--acc);color:var(--acc)}
+
 @media (hover: hover) {
   .vchip:hover { border-color: var(--acc2); }
 }
