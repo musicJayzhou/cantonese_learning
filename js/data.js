@@ -1,7 +1,10 @@
 "use strict";
 /* ================= 多课数据装载 ================= */
-/* 兼容：lesson01.js 设 window.COURSE_DATA（无 meta.id/type），新课设 COURSE_DATA_02/03 */
-const COURSES = [window.COURSE_DATA, window.COURSE_DATA_02, window.COURSE_DATA_03].filter(Boolean);
+/* 兼容：lesson01.js 设 window.COURSE_DATA（无 meta.id/type），新课设 COURSE_DATA_NN */
+const COURSES = [window.COURSE_DATA,
+  window.COURSE_DATA_02, window.COURSE_DATA_03, window.COURSE_DATA_04, window.COURSE_DATA_05,
+  window.COURSE_DATA_06, window.COURSE_DATA_07, window.COURSE_DATA_08, window.COURSE_DATA_09,
+  window.COURSE_DATA_10, window.COURSE_DATA_11, window.COURSE_DATA_12].filter(Boolean);
 COURSES.forEach((c, i) => {
   c.meta = c.meta || {};
   if(!c.meta.id) c.meta.id = 'lesson0' + (i+1);
@@ -46,6 +49,7 @@ window.togglePrac = id => {
   onPracticeScopeChange();
 };
 window.resetPracFollow = () => { pracSel = null; store.set('pracLessons', null); onPracticeScopeChange(); };
+window.pracSelectAll = () => { pracSel = COURSES.map(c=>c.meta.id); store.set('pracLessons', pracSel); onPracticeScopeChange(); };
 
 /* 课次多选 chips（记忆卡/游乐场共用） */
 function pracChipsHTML(){
@@ -55,6 +59,7 @@ function pracChipsHTML(){
     const on = pracSel ? pracSel.includes(c.meta.id) : c.meta.id===curLesson;
     h += `<button class="tab ${on?'on':''}" onclick="togglePrac('${c.meta.id}')">${c.meta.lesson}</button>`;
   });
+  h += `<button class="tab" onclick="pracSelectAll()">✓ 全選</button>`;
   return h + `</div>`;
 }
 

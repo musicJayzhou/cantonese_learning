@@ -8,6 +8,7 @@ $$('nav button').forEach(b=>b.addEventListener('click', ()=>{
   $('#view-'+b.dataset.v).classList.add('on');
   if(b.dataset.v==='cards'){ fcBuildPool(); renderCards(); }
   if(b.dataset.v==='play') renderPlay();
+  if(b.dataset.v==='phonics') renderPhonics();
   if(b.dataset.v!=='play') stopBlitz();
   scrollTo(0,0);
 }));

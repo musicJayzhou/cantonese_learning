@@ -503,3 +503,30 @@ nav button.on .bi{transform:translateY(-2px) scale(1.15)}
   .g-card { break-inside: avoid }
   .fc .fimg { width: 130px; height: 130px }
 }
+
+/* ===== 發音板块（音標對應表） ===== */
+.ph-table{display:flex;flex-direction:column;gap:6px}
+.ph-row{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px;flex-wrap:wrap}
+.ph-c{flex:0 0 62px;display:flex;flex-direction:column;gap:1px}
+.ph-c b{font-size:16px;color:var(--acc)}
+.ph-mand{font-size:10px;color:var(--dim)}
+.ph-cell{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;flex:1 1 150px;min-width:0}
+.ph-cell .jy{color:var(--acc);font-weight:500;font-size:12px}
+.ph-cell.ph-pure{flex:0 1 auto}
+.pi.sm{width:30px;height:30px;flex:none;border-radius:50%;background:linear-gradient(135deg,var(--acc2),#5a3ee0);display:grid;place-items:center;font-size:12px;border:none;color:#fff;cursor:pointer}
+.pi.sm:active{transform:scale(.9)}
+.pi.sm.playing{background:linear-gradient(135deg,var(--acc),#ff9f1c);animation:pulse 1s infinite}
+.pi.sm.loading{background:linear-gradient(135deg,var(--acc),#ff9f1c);animation:pulse .6s infinite}
+.ph-fams{display:flex;flex-wrap:wrap;gap:8px}
+.ph-fams .chip{cursor:pointer}
+.ph-noaudio{opacity:.65;cursor:default}
+.ph-zh{color:var(--dim);font-weight:600}
+@media(min-width:1024px){.ph-c{flex-basis:90px}.ph-cell{font-size:14px}}
+
+/* ===== 课次扩容：tabs 横滚 + 快速跳堂 ===== */
+.lesson-tabs{flex-wrap:nowrap}
+.lesson-tabs .tab{flex:0 0 auto;min-width:64px}
+.ljump{flex:0 0 auto;align-self:center;margin-left:auto;max-width:112px;background:var(--card2);color:var(--tx);
+  border:1px solid var(--line);border-radius:999px;padding:6px 8px;font-size:12px;font-weight:700;
+  position:sticky;right:2px;z-index:5;box-shadow:-8px 0 12px rgba(15,14,26,.85)}
+@media(min-width:1024px){.ljump{max-width:200px;font-size:13px}}

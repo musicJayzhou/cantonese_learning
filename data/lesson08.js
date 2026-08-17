@@ -1,0 +1,136 @@
+/* 第08堂：童年遊戲（56 页讲义：p02-p52 词汇 + p53-p56 句型問答）+ 急口令08 */
+window.COURSE_DATA_08 = {
+  "meta": {
+    "id": "lesson08",
+    "lesson": "第08堂",
+    "title": "廣東話第08堂 · 複習寶",
+    "short": "童年遊戲 / 急口令08",
+    "date": "2026-08-17"
+  },
+  "sections": [
+    {
+      "id": "games",
+      "type": "vocab",
+      "title": "童年遊戲 Games",
+      "icon": "🪀",
+      "jyut": "yàuh-hei",
+      "grammar": "句型：「你細個鍾意玩乜嘢遊戲呀？ Néih sai-go jūng-yi wáan māt-yéh yàuh-hei a?」→「我鍾意跳飛機 Ngóh jūng-yi tiu fēi-gēi。」",
+      "allInOne": "audio/lesson08/games/all_in_one.mp3",
+      "items": [
+        {"zh":"康樂棋","jyut":"hōng-lohk-kéi","en":"Chinese billiard / Novuss (Chinese Happy Chess)","audio":"audio/lesson08/games/items/02.m4a","img":"img/lesson08/games/p02_1.webp"},
+        {"zh":"足球棋","jyut":"jūk-kàuh-kéi","en":"Table football chess","audio":"audio/lesson08/games/items/04.m4a","img":"img/lesson08/games/p04_1.webp"},
+        {"zh":"飛行棋","jyut":"fēi-hàhng-kéi","en":"Aeroplane Chess","audio":"audio/lesson08/games/items/05.m4a","img":"img/lesson08/games/p05_1.webp"},
+        {"zh":"鬥獸棋","jyut":"dau-sau-kéi","en":"Jungle (board game)","audio":"audio/lesson08/games/items/06.m4a","img":"img/lesson08/games/p06_1.webp"},
+        {"zh":"象棋","jyut":"jeuhng-kéi","en":"Chinese chess","audio":"audio/lesson08/games/items/08.m4a","img":"img/lesson08/games/p08_1.webp"},
+        {"zh":"波子棋","jyut":"bō-jí-kéi","en":"Chinese checkers","audio":"audio/lesson08/games/items/09.m4a","img":"img/lesson08/games/p09_1.webp"},
+        {"zh":"大富翁","jyut":"daaih-fu-yūng","en":"Monopoly","audio":"audio/lesson08/games/items/10.m4a","img":"img/lesson08/games/p10_1.webp"},
+        {"zh":"大風吹","jyut":"daaih-fūng-chēui","en":"A Cold Wind Blows / The Big Wind Blows","audio":"audio/lesson08/games/items/11.m4a","img":"img/lesson08/games/p11_1.webp"},
+        {"zh":"十字界豆腐","jyut":"sahp-jih-gaai-dauh-fuh","en":"Cross-grid tofu (pen-and-paper game)","audio":"audio/lesson08/games/items/12.m4a","img":"img/lesson08/games/p12_1.webp"},
+        {"zh":"黐紅豆","jyut":"chī-hùhng-dáu","en":"Sticky red bean (tag game)","audio":"audio/lesson08/games/items/13a.m4a","img":"img/lesson08/games/p13_1.webp"},
+        {"zh":"糖黐豆","jyut":"tòhng-chī-dáu","en":"Sticky sugar bean (tag game)","audio":"audio/lesson08/games/items/13b.m4a","img":"img/lesson08/games/p13_1.webp"},
+        {"zh":"伏匿匿（僕哩哩）","jyut":"buhk-lēi-lēi","en":"Hide-and-seek","audio":"audio/lesson08/games/items/14a.m4a","img":"img/lesson08/games/p14_1.webp"},
+        {"zh":"捉兒人（捉依欣）","jyut":"jūk-yī-yān","en":"Hide-and-seek","audio":"audio/lesson08/games/items/14b.m4a","img":"img/lesson08/games/p14_1.webp"},
+        {"zh":"捉迷藏","jyut":"jūk-máih-chàhng","en":"Hide-and-seek","img":"img/lesson08/games/p14_1.webp"},
+        {"zh":"埋舟","jyut":"màaih-jāu","en":"Traditional playground game","audio":"audio/lesson08/games/items/15.m4a","img":"img/lesson08/games/p15_1.webp"},
+        {"zh":"何濟公","jyut":"hòh-jai-gūng","en":"Ho Chai Kung (hand game)","audio":"audio/lesson08/games/items/16.m4a","img":"img/lesson08/games/p16_1.webp"},
+        {"zh":"耍盲雞","jyut":"sá-màahng-gāi","en":"Blind man's buff","audio":"audio/lesson08/games/items/17.m4a","img":"img/lesson08/games/p17_1.webp"},
+        {"zh":"麻鷹捉雞仔","jyut":"màh-yīng-jūk-gāi-jái","en":"Eagle catches the chicks","audio":"audio/lesson08/games/items/18.m4a","img":"img/lesson08/games/p18_1.webp"},
+        {"zh":"火燒後欄","jyut":"fó-sīu-hauh-lāan","en":"Fire at the back fence (chase game)","audio":"audio/lesson08/games/items/19.m4a","img":"img/lesson08/games/p19_1.webp"},
+        {"zh":"跳橡筋繩","jyut":"tiu-jeuhng-gān-síng","en":"Chinese jump rope (elastics)","audio":"audio/lesson08/games/items/20.m4a","img":"img/lesson08/games/p20_1.webp"},
+        {"zh":"跳大繩","jyut":"tiu-daaih-síng","en":"Long rope skipping","audio":"audio/lesson08/games/items/22.m4a","img":"img/lesson08/games/p22_1.webp"},
+        {"zh":"跳飛機","jyut":"tiu-fēi-gēi","en":"Hopscotch","audio":"audio/lesson08/games/items/23.m4a","img":"img/lesson08/games/p23_1.webp"},
+        {"zh":"海陸空","jyut":"hói-luhk-hūng","en":"Sea, land, air (running game)","audio":"audio/lesson08/games/items/24.m4a","img":"img/lesson08/games/p24_1.webp"},
+        {"zh":"踩波","jyut":"cháai-bō","en":"Balloon stomping game","audio":"audio/lesson08/games/items/25a.m4a","img":"img/lesson08/games/p25_1.webp","variants":[{"jyut":"cháai-hei-kàuh 踩氣球","audio":"audio/lesson08/games/items/25b.m4a"}]},
+        {"zh":"踼毽","jyut":"tek-yín","en":"Shuttlecock kicking","audio":"audio/lesson08/games/items/26.m4a","img":"img/lesson08/games/p26_1.webp"},
+        {"zh":"狐狸先生幾多點","jyut":"wùh-léi-sīn-sāang-géi-dō-dím","en":"What's the time, Mr. Wolf?","audio":"audio/lesson08/games/items/27.m4a"},
+        {"zh":"一二三紅綠燈","jyut":"yāt-yih-sāam hùhng-luhk-dāng","en":"Red light, green light","audio":"audio/lesson08/games/items/29.m4a","img":"img/lesson08/games/p29_1.webp"},
+        {"zh":"估領袖","jyut":"gú-líhng-jauh","en":"Who is the leader","audio":"audio/lesson08/games/items/30.m4a","img":"img/lesson08/games/p31_1.webp"},
+        {"zh":"拋手巾","jyut":"pāau-sáu-gān","en":"Duck, duck, goose (drop the handkerchief)","audio":"audio/lesson08/games/items/32a.m4a","img":"img/lesson08/games/p32_1.webp","variants":[{"jyut":"diuh-sáu-gān 掉手巾","audio":"audio/lesson08/games/items/32b.m4a"},{"jyut":"deng-sáu-gān 掟手巾","audio":"audio/lesson08/games/items/32c.m4a"}]},
+        {"zh":"爭櫈仔","jyut":"jāang-dang-jái","en":"Musical chairs","audio":"audio/lesson08/games/items/33.m4a","img":"img/lesson08/games/p33_1.webp"},
+        {"zh":"拍公仔紙","jyut":"paak-gūng-jái-jí","en":"Milk caps (card-slapping game)","audio":"audio/lesson08/games/items/34.m4a","img":"img/lesson08/games/p34_1.webp"},
+        {"zh":"換衫公仔紙","jyut":"wuhn-sāam-gūng-jái-jí","en":"Paper doll dress-up cards","audio":"audio/lesson08/games/items/35.m4a","img":"img/lesson08/games/p35_1.webp"},
+        {"zh":"抓子","jyut":"wá-jí","en":"Jacks","audio":"audio/lesson08/games/items/36.m4a","img":"img/lesson08/games/p36_1.webp"},
+        {"zh":"玩竹籤","jyut":"wáan-jūk-chīm","en":"Pick-up sticks","audio":"audio/lesson08/games/items/38.m4a","img":"img/lesson08/games/p38_1.webp"},
+        {"zh":"猜包剪揼","jyut":"chāai-bāau-jín-dahp","en":"Rock-paper-scissors","audio":"audio/lesson08/games/items/39a.m4a","img":"img/lesson08/games/p39_1.webp","variants":[{"jyut":"chāai-chìhng-chàhm 猜呈尋","audio":"audio/lesson08/games/items/39b.m4a"}]},
+        {"zh":"猜皇帝","jyut":"chāai-wòhng-dai","en":"Rock-paper-scissors (guess the emperor)","audio":"audio/lesson08/games/items/40.m4a","img":"img/lesson08/games/p40_1.webp"},
+        {"zh":"天下太平","jyut":"tīn-hah-daai-pìhng","en":"Peace under heaven (hand game)","audio":"audio/lesson08/games/items/41.m4a"},
+        {"zh":"東南西北","jyut":"dung-nàahm-sāi-bāk","en":"Paper fortune teller","audio":"audio/lesson08/games/items/42.m4a","img":"img/lesson08/games/p42_1.webp"},
+        {"zh":"放紙鷂（鳶）","jyut":"fong-jí-yíu","en":"Kite flying","audio":"audio/lesson08/games/items/44.m4a","img":"img/lesson08/games/p44_1.webp"},
+        {"zh":"打千秋（打韆鞦）","jyut":"dá-chīn-chāu","en":"Playing on a swing","audio":"audio/lesson08/games/items/45.m4a","img":"img/lesson08/games/p45_1.webp"},
+        {"zh":"掟仙","jyut":"deng-sīn","en":"Coin tossing game","audio":"audio/lesson08/games/items/46.m4a","img":"img/lesson08/games/p46_1.webp"},
+        {"zh":"汽水蓋","jyut":"hei-séui-goi","en":"Bottle cap game","audio":"audio/lesson08/games/items/47.m4a","img":"img/lesson08/games/p47_1.webp"},
+        {"zh":"煮飯仔","jyut":"jú-faahn-jái","en":"Playing house","audio":"audio/lesson08/games/items/48.m4a","img":"img/lesson08/games/p48_1.webp"},
+        {"zh":"碟仙","jyut":"dihp-sīn","en":"Ouija","audio":"audio/lesson08/games/items/49a.m4a","img":"img/lesson08/games/p49_1.webp","variants":[{"jyut":"án-sīn 銀仙","audio":"audio/lesson08/games/items/49b.m4a"}]},
+        {"zh":"扭計骰","jyut":"náu-gái-sīk","en":"Rubik's Cube","audio":"audio/lesson08/games/items/50.m4a","img":"img/lesson08/games/p50_1.webp"},
+        {"zh":"搖搖","jyut":"yìuh-yíu","en":"Yo-yo","audio":"audio/lesson08/games/items/51.m4a","img":"img/lesson08/games/p51_1.webp"},
+        {"zh":"麻芝姑","jyut":"màh-jī-gū","en":"Rock-paper-scissors chant（麻＝包、芝＝剪、姑＝揼）","audio":"audio/lesson08/games/items/52.m4a","img":"img/lesson08/games/p52_1.webp"},
+        {"zh":"夾公仔","jyut":"gaahp-gūng-jai","en":"Claw machine","audio":"audio/lesson08/games/items/gaahp-gung-jai.m4a","variants":[{"jyut":"gehp-gūng-jai（又讀）","audio":"audio/lesson08/games/items/gehp-gung-jai.m4a"},{"jyut":"gihp-gūng-jai（又讀）","audio":"audio/lesson08/games/items/gihp-gung-jai.m4a"}]}
+      ],
+      "sentences": [
+        {"zh":"你細個鍾意玩乜嘢遊戲呀？","jyut":"Néih sai-go jūng-yi wáan māt-yéh yàuh-hei a?","en":"What kind of games did you like to play when you were a child?","audio":"audio/lesson08/games/dialog/53a.m4a","variants":[{"jyut":"…玩咩遊戲呀？…wáan mē yàuh-hei a?","audio":"audio/lesson08/games/dialog/53b.m4a"}]},
+        {"zh":"我鍾意跳飛機。","jyut":"Ngóh jūng-yi tiu fēi-gēi.","en":"I liked hopscotch.","audio":"audio/lesson08/games/dialog/53c.m4a"},
+        {"zh":"我鍾意玩搖搖。","jyut":"Ngóh jūng-yi wáan yìuh-yíu.","en":"I liked playing with a yo-yo.","audio":"audio/lesson08/games/dialog/53d.m4a"},
+        {"zh":"我鍾意放紙鷂。","jyut":"Ngóh jūng-yi fong jí-yíu.","en":"I liked flying kites.","audio":"audio/lesson08/games/dialog/53e.m4a"},
+        {"zh":"你鍾意喺邊度玩呀？","jyut":"Néih jūng-yi hái bīn-douh wáan a?","en":"Where did you like to play?","audio":"audio/lesson08/games/dialog/54a.m4a","variants":[{"jyut":"…去邊度玩呀？…heui bīn-douh wáan a?","audio":"audio/lesson08/games/dialog/54b.m4a"}]},
+        {"zh":"我鍾意喺學校玩。","jyut":"Ngóh jūng-yi hái hohk-haauh wáan.","en":"I liked playing at school.","audio":"audio/lesson08/games/dialog/54c.m4a"},
+        {"zh":"我鍾意去公園玩。","jyut":"Ngóh jūng-yi heui gūng-yún wáan.","en":"I liked going to the park to play.","audio":"audio/lesson08/games/dialog/54d.m4a"},
+        {"zh":"你鍾意同邊個玩呀？","jyut":"Néih jūng-yi tùhng bīn-go wáan a?","en":"Who did you like to play with?","audio":"audio/lesson08/games/dialog/55a.m4a"},
+        {"zh":"我鍾意同同學玩。","jyut":"Ngóh jūng-yi tùhng tùhng-hohk wáan.","en":"I liked playing with my schoolmates.","audio":"audio/lesson08/games/dialog/55b.m4a","variants":[{"jyut":"…同朋友玩 …tùhng pàhng-yáuh wáan","audio":"audio/lesson08/games/dialog/55c.m4a"},{"jyut":"…同兄弟姊妹玩 …tùhng hīng-daih-jí-muih wáan","audio":"audio/lesson08/games/dialog/55d.m4a"}]},
+        {"zh":"你鍾意幾時玩呀？","jyut":"Néih jūng-yi géi-sìh wáan a?","en":"When did you like to play?","audio":"audio/lesson08/games/dialog/56a.m4a"},
+        {"zh":"我鍾意放學之後玩。","jyut":"Ngóh jūng-yi fong-hohk jī-hauh wáan.","en":"I liked playing after school.","audio":"audio/lesson08/games/dialog/56b.m4a","variants":[{"jyut":"…做完功課之後玩 …jouh-yùhn gūng-fo jī-hauh wáan","audio":"audio/lesson08/games/dialog/56c.m4a"},{"jyut":"…放假嘅時候玩 …fong-ga ge-sìh-hauh wáan","audio":"audio/lesson08/games/dialog/56d.m4a"}]}
+      ]
+    },
+    {
+      "id": "tongue08",
+      "type": "tongue",
+      "title": "急口令 08",
+      "icon": "🌪️",
+      "jyut": "Gāp-háu-lihng",
+      "grammar": "街頭三蚊一斤雞，街尾三蚊一斤龜 —— 雞貴定龜貴？",
+      "words": [
+        {"zh":"街頭","jyut":"gāai-tàuh","en":"start of the street","audio":"audio/lesson08/tongue/words/01.mp3"},
+        {"zh":"三","jyut":"sāam","en":"three","audio":"audio/lesson08/tongue/words/02.mp3"},
+        {"zh":"蚊","jyut":"mān","en":"dollar（元/塊）","audio":"audio/lesson08/tongue/words/03.mp3"},
+        {"zh":"一","jyut":"yāt","en":"one","audio":"audio/lesson08/tongue/words/04.mp3"},
+        {"zh":"斤","jyut":"gān","en":"catty（斤）","audio":"audio/lesson08/tongue/words/05.mp3"},
+        {"zh":"雞","jyut":"gāi","en":"chicken","audio":"audio/lesson08/tongue/words/06.mp3"},
+        {"zh":"街尾","jyut":"gāai-méih","en":"end of the street","audio":"audio/lesson08/tongue/words/07.mp3"},
+        {"zh":"龜","jyut":"gwāi","en":"tortoise","audio":"audio/lesson08/tongue/words/08.mp3"},
+        {"zh":"買","jyut":"máaih","en":"to buy","audio":"audio/lesson08/tongue/words/09.mp3"},
+        {"zh":"你話","jyut":"néih wah","en":"you say / tell me","audio":"audio/lesson08/tongue/words/10.mp3"},
+        {"zh":"貴","jyut":"gwai","en":"expensive","audio":"audio/lesson08/tongue/words/11.mp3"},
+        {"zh":"定","jyut":"dihng","en":"or（還是）","audio":"audio/lesson08/tongue/words/12.mp3"}
+      ],
+      "full": {
+        "zh": "街頭三蚊一斤雞，街尾三蚊一斤龜，街頭買斤雞，街尾買斤龜，你話雞貴定龜貴。",
+        "jyut": "gāai-tàuh sāam mān yāt gān gāi, gāai-méih sāam mān yāt gān gwāi, gāai-tàuh máaih gān gāi, gāai-méih máaih gān gwāi, néih wah gāi gwai dihng gwāi gwai.",
+        "audio": "audio/lesson08/tongue/speeds/02_normal.mp3"
+      },
+      "speeds": [
+        {"label":"慢速","audio":"audio/lesson08/tongue/speeds/01_slow.mp3"},
+        {"label":"正常","audio":"audio/lesson08/tongue/speeds/02_normal.mp3"},
+        {"label":"快速","audio":"audio/lesson08/tongue/speeds/03_fast.mp3"},
+        {"label":"超快","audio":"audio/lesson08/tongue/speeds/04_veryfast.mp3"}
+      ],
+      "tip": "💡 秘笈：留意 <b>gāai-tàuh（街頭）</b> 同 <b>gāai-méih（街尾）</b>、<b>gāi（雞）</b> 同 <b>gwāi（龜）</b> 嘅分別，跟住由慢速檔開始加速！"
+    }
+  ],
+  "pairs": [
+    {"qzh":"你細個鍾意玩乜嘢遊戲呀？","qjy":"Néih sai-go jūng-yi wáan māt-yéh yàuh-hei a?","qa":"audio/lesson08/games/dialog/53a.m4a","azh":"我鍾意跳飛機。","ajy":"Ngóh jūng-yi tiu fēi-gēi.","aa":"audio/lesson08/games/dialog/53c.m4a"},
+    {"qzh":"你鍾意喺邊度玩呀？","qjy":"Néih jūng-yi hái bīn-douh wáan a?","qa":"audio/lesson08/games/dialog/54a.m4a","azh":"我鍾意喺學校玩。","ajy":"Ngóh jūng-yi hái hohk-haauh wáan.","aa":"audio/lesson08/games/dialog/54c.m4a"},
+    {"qzh":"你鍾意去邊度玩呀？","qjy":"Néih jūng-yi heui bīn-douh wáan a?","qa":"audio/lesson08/games/dialog/54b.m4a","azh":"我鍾意去公園玩。","ajy":"Ngóh jūng-yi heui gūng-yún wáan.","aa":"audio/lesson08/games/dialog/54d.m4a"},
+    {"qzh":"你鍾意同邊個玩呀？","qjy":"Néih jūng-yi tùhng bīn-go wáan a?","qa":"audio/lesson08/games/dialog/55a.m4a","azh":"我鍾意同朋友玩。","ajy":"Ngóh jūng-yi tùhng pàhng-yáuh wáan.","aa":"audio/lesson08/games/dialog/55c.m4a"},
+    {"qzh":"你鍾意幾時玩呀？","qjy":"Néih jūng-yi géi-sìh wáan a?","qa":"audio/lesson08/games/dialog/56a.m4a","azh":"我鍾意放學之後玩。","ajy":"Ngóh jūng-yi fong-hohk jī-hauh wáan.","aa":"audio/lesson08/games/dialog/56b.m4a"},
+    {"qzh":"你鍾意幾時玩呀？","qjy":"Néih jūng-yi géi-sìh wáan a?","qa":"audio/lesson08/games/dialog/56a.m4a","azh":"我鍾意放假嘅時候玩。","ajy":"Ngóh jūng-yi fong-ga ge-sìh-hauh wáan.","aa":"audio/lesson08/games/dialog/56d.m4a"}
+  ],
+  "seg": [
+    {"zh":"你細個鍾意玩咩遊戲呀？","parts":["Néih","sai-go","jūng-yi","wáan","mē yàuh-hei","a"]},
+    {"zh":"我鍾意跳飛機。","parts":["Ngóh","jūng-yi","tiu","fēi-gēi"]},
+    {"zh":"我鍾意同同學玩。","parts":["Ngóh","jūng-yi","tùhng","tùhng-hohk","wáan"]},
+    {"zh":"我鍾意放學之後玩。","parts":["Ngóh","jūng-yi","fong-hohk","jī-hauh","wáan"]},
+    {"zh":"街頭三蚊一斤雞","parts":["gāai-tàuh","sāam mān","yāt gān","gāi"]},
+    {"zh":"街尾三蚊一斤龜","parts":["gāai-méih","sāam mān","yāt gān","gwāi"]},
+    {"zh":"街頭買斤雞，街尾買斤龜","parts":["gāai-tàuh","máaih gān gāi","gāai-méih","máaih gān gwāi"]},
+    {"zh":"你話雞貴定龜貴。","parts":["néih wah","gāi gwai","dihng","gwāi gwai"]}
+  ]
+};

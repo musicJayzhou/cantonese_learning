@@ -33,7 +33,11 @@ function bigPlayHTML(audio, label, sub){
 
 function lessonTabsHTML(){
   return `<div class="tabs lesson-tabs" id="lessonTabs">` + COURSES.map(c=>
-    `<button class="tab ${c.meta.id===curLesson?'on':''}" data-l="${c.meta.id}">${c.meta.lesson}</button>`).join('') + `</div>`;
+    `<button class="tab ${c.meta.id===curLesson?'on':''}" data-l="${c.meta.id}">${c.meta.lesson}</button>`).join('')
+    + `<select class="ljump" id="lessonJump" onchange="if(this.value){setLesson(this.value)}" title="快速跳去某一堂">`
+    + `<option value="">⚡ 跳堂…</option>`
+    + COURSES.map(c=>`<option value="${c.meta.id}" ${c.meta.id===curLesson?'selected':''}>${c.meta.lesson} ${esc(c.meta.short)}</option>`).join('')
+    + `</select></div>`;
 }
 
 function renderLearn(){
@@ -59,6 +63,10 @@ function renderLearn(){
         h += `<div class="sec-block"><div class="sub-h">${esc(g.name)}</div><div class="grid">`
           + g.items.map(it=>cardHTML(cid, sec.id, it)).join('') + `</div></div>`;
       });
+      if(hasSent){
+        /* 分组词汇 + 句型（肉類/點樣煮等）：句型块跟在所有分组后面 */
+        h += `<div class="sec-block"><div class="sub-h">句型對話 · 點讀</div>` + sec.sentences.map(sentHTML).join('') + `</div>`;
+      }
     }
     else if(hasSent){
       /* 词汇 + 句型双栏（顏色/形狀） */
@@ -87,17 +95,26 @@ function renderLearn(){
       sec.blocks.forEach(b=>{
         if(b.kind==='vocab'){
           h += `<div class="sec-block"><div class="sub-h">${esc(b.label)}</div>`;
-          if(sec.audioVocab) h += bigPlayHTML(sec.audioVocab, '生字朗讀', 'Vocabulary all-in-one');
-          h += `<div class="grid">` + sec[b.key].map(it=>cardHTML(cid, sec.id+'-v', it)).join('') + `</div></div>`;
+          if(b.audio) h += bigPlayHTML(b.audio, '連續播放', 'All-in-one');
+          else if(sec.audioVocab) h += bigPlayHTML(sec.audioVocab, '生字朗讀', 'Vocabulary all-in-one');
+          h += `<div class="grid">` + sec[b.key].map(it=>cardHTML(cid, sec.id+'-'+(b.mk||'v'), it)).join('') + `</div></div>`;
         }
         else if(b.kind==='dialogue'){
           h += `<div class="sec-block"><div class="sub-h">${esc(b.label)}</div>`;
-          if(sec.audioDialogue) h += bigPlayHTML(sec.audioDialogue, '整段對話', 'Dialogue all-in-one');
+          if(b.audio) h += bigPlayHTML(b.audio, '整段對話', 'Dialogue all-in-one');
+          else if(sec.audioDialogue) h += bigPlayHTML(sec.audioDialogue, '整段對話', 'Dialogue all-in-one');
           h += sec[b.key].map(d=>`<div class="srow">
             ${d.audio?`<button class="pi" data-audio="${d.audio}">▶</button>`:''}
-            <div class="tx"><div class="zh">【${d.tag}】${esc(d.zh)}</div><div class="jy">${esc(d.jyut)}</div><div class="en">${esc(d.en)}</div>
+            <div class="tx"><div class="zh">${d.tag?`【${d.tag}】`:''}${esc(d.zh)}</div><div class="jy">${esc(d.jyut)}</div><div class="en">${esc(d.en)}</div>
             ${(d.variants||[]).length?`<div class="vchips">`+d.variants.map(x=>`<span class="vchip" data-audio="${x.audio}">🔊 ${esc(x.jyut)}</span>`).join('')+`</div>`:''}
             </div></div>`).join('');
+          h += `</div>`;
+        }
+        else if(b.kind==='sents'){
+          /* 句型点读行（Conversation / 句式操练） */
+          h += `<div class="sec-block"><div class="sub-h">${esc(b.label)}</div>`;
+          if(b.audio) h += bigPlayHTML(b.audio, '連續播放', 'All-in-one');
+          h += sec[b.key].map(sentHTML).join('');
           h += `</div>`;
         }
         else if(b.kind==='note'){
@@ -177,6 +194,10 @@ function renderLearn(){
   }
   /* ---------- 文法型（纯阅读，无音频） ---------- */
   else if(sec.type==='grammar'){
+    if(sec.also){
+      h += `<div class="grammar">📎 呢份文法亦收錄喺 <b>${esc(sec.also.lesson)}</b>，兩堂內容一樣。
+        <button class="chip" onclick="gotoLessonSec('${sec.also.id}','${sec.also.sec}')">↗ 去${esc(sec.also.lesson)}睇</button></div>`;
+    }
     sec.groups.forEach(g=>{
       h += `<div class="sec-block"><div class="sub-h">${esc(g.name)}</div>`;
       h += g.items.map((it,i)=>`<div class="g-card">
@@ -188,6 +209,9 @@ function renderLearn(){
   }
   v.innerHTML = h;
   renderSecTabs();
+  /* 当前课 tab 滚入视野（课次多咗都一眼睇到） */
+  const onTab = v.querySelector('#lessonTabs .tab.on');
+  if(onTab && onTab.scrollIntoView) onTab.scrollIntoView({inline:'center', block:'nearest'});
   /* 后台预载本区块短音频（未解锁时静默跳过，解锁时会自动补一次） */
   if(window.preloadSectionAudio) preloadSectionAudio();
 }
@@ -200,6 +224,12 @@ function renderSecTabs(){
 function speedDone(isLast){
   if(isLast===true || isLast==='快速'){ confetti(60); toast('🚀 最快速度挑戰！跟得上就勁！'); }
 }
+/* 跨课跳转（文法互链等） */
+window.gotoLessonSec = (l, s) => {
+  if(!COURSES.some(c=>c.meta.id===l)) return;
+  if(l!==curLesson) setLesson(l);
+  if(s && curCourse().sections.some(x=>x.id===s)){ curSec = s; renderLearn(); scrollTo(0,0); }
+};
 window.tfAnswer = function(btn, saidYes){
   const row = btn.closest('.tf-row');
   if(row.classList.contains('done')) return;
