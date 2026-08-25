@@ -1,22 +1,22 @@
 name: Deploy to Cloudflare Workers
 
-  on:
-    push:
-      branches: [main]
-    workflow_dispatch:
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
 
-  jobs:
-    deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-        - name: Remove .git (avoid 25MiB single-asset limit)
-          run: rm -rf .git
+      - name: Remove .git (avoid 25MiB single-asset limit)
+        run: rm -rf .git
 
-        - name: Deploy
-          uses: cloudflare/wrangler-action@v3
-          with:
-            apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-            accountId: dc935a8a644794d69956f3b60c342e88
-            command: deploy
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: dc935a8a644794d69956f3b60c342e88
+          command: deploy
