@@ -59,10 +59,11 @@
 cd D:\Workspace\Cantonese
 git add .
 git commit -m "新增内容：<简述>"
-git push
+# 通过 Clash Verge 本机代理推送（端口 7897，VPN 未开时需先开启）
+git -c http.proxy=http://127.0.0.1:7897 -c https.proxy=http://127.0.0.1:7897 push origin main
 ```
 
-推送后 1~2 分钟，GitHub Pages 会自动重新构建，网站即更新。
+推送后 1~2 分钟，GitHub Pages 和 Cloudflare Workers 会自动重新构建，两边网站同步更新。
 
 ## 四、完成后
 
