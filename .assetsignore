@@ -1,0 +1,10 @@
+# wrangler 上传静态资产时排除以下文件（语法同 .gitignore）
+# 官方文档：https://developers.cloudflare.com/workers/static-assets/binding/
+
+# CI 部署时 wrangler-action 会把 wrangler 安装进 node_modules（含 144MB 的 workerd 二进制）
+**/node_modules
+
+# 保险起见排除 git 目录（CI 中已 rm -rf .git，此处双保险）
+**/.git
+
+**/.DS_Store
