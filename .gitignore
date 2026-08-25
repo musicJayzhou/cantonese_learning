@@ -22,3 +22,6 @@ desktop.ini
 # Cloudflare
 .wrangler/
 node_modules/
+
+# Cloudflare Pages 部署目录（每次从源文件重新生成）
+public/
