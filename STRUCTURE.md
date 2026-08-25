@@ -36,6 +36,7 @@
   - `audit-assets.js` — 校验全部数据文件引用的音频/图片与磁盘一致（无缺失、无冗余）
 - `docs/` — 文档
   - `SUBMISSION-WORKFLOW.md` — 内容投稿与发布流程
+- `wrangler.jsonc` — Cloudflare Workers 部署配置（静态资源目录 = 仓库根目录；构建命令 `rm -rf .git` 在 Cloudflare 后台配置）
 - `.github/ISSUE_TEMPLATE/` — GitHub Issue 模板
   - `submit-content.yml` — 内容投稿表单模板
 - `backup/` — 原始文件备份（已 gitignore）
