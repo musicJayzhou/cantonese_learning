@@ -18,3 +18,7 @@ desktop.ini
 
 # 提取/验证临时产物
 .tmp-extract/
+
+# Cloudflare
+.wrangler/
+node_modules/
