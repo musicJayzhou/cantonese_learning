@@ -14,6 +14,15 @@
 
 学习进度（星星、连击天数、词汇标记）自动保存在浏览器 LocalStorage，标记在学习页与记忆卡之间互通。
 
+## 在线访问
+
+| 站点 | 地址 | 说明 |
+|------|------|------|
+| 国内镜像（推荐） | https://dorami.vip | Cloudflare Workers + 自定义域名，国内直连 |
+| 主站 | https://musicjayzhou.github.io/cantonese_learning/ | GitHub Pages，海外访问稳定 |
+
+两个站点内容完全一致，push 到 main 分支后通过 GitHub Actions 自动同步部署。
+
 ## 本地运行
 
 纯静态网站，无需安装任何依赖。直接用浏览器打开 `index.html` 即可，或用任意静态服务器：
@@ -39,4 +48,5 @@ npx serve
 ## 技术栈
 
 - 原生 HTML / CSS / JavaScript（无框架、无构建步骤）
-- 部署于 GitHub Pages
+- 部署：GitHub Pages（主站）+ Cloudflare Workers（国内镜像，自定义域 dorami.vip）
+- CI/CD：GitHub Actions（.github/workflows/deploy-cloudflare.yml）push 即自动双端部署

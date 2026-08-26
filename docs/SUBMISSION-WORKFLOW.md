@@ -11,7 +11,7 @@
 
 ## 一、投稿者操作
 
-1. 打开网站 `https://musicjayzhou.github.io/cantonese_learning/`
+1. 打开网站 `https://dorami.vip`（国内直连）或 `https://musicjayzhou.github.io/cantonese_learning/`（海外）
 2. 点击页面顶部右上角的 **📝** 图标
 3. 在 GitHub Issue 页面填写表单（粤拼、繁体中文、英文等）
 4. 点击 **Submit new issue**
