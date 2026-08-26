@@ -28,7 +28,13 @@ function makeCaches() {
           const r = m.get(u);
           return r ? r.clone() : undefined;
         },
-        put: async (req, res) => { m.set(typeof req === 'string' ? req : req.url, res); },
+        put: async (req, res) => {
+          /* 真实 Cache API 的 put 会消费 body——mock 必须同样消费，
+             否则测不出「put 后再 clone/使用原响应」的回归 */
+          const buf = await res.arrayBuffer();
+          m.set(typeof req === 'string' ? req : req.url,
+            new Response(buf, { status: res.status, statusText: res.statusText, headers: res.headers }));
+        },
         delete: async (req) => m.delete(typeof req === 'string' ? req : req.url),
         keys: async () => [...m.keys()].map(u => new Request(u)),
       };

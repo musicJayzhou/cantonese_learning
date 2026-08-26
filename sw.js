@@ -103,9 +103,10 @@ async function _media(req, event) {
     if (res.status === 200 && res.ok) {
       var buf = await res.arrayBuffer();
       var stored = _stamp(res, buf);
-      try { await cache.put(req.url, stored); } catch (e) { /* 配额满：本次不缓存 */ }
+      /* 注意顺序：cache.put 会消费 body，必须先克隆再 put，克隆过的留给自己返回 */
+      try { await cache.put(req.url, stored.clone()); } catch (e) { /* 配额满：本次不缓存 */ }
       event.waitUntil(_trimMaybe());
-      return stored.clone();
+      return stored;
     }
     return res;
   } catch (e) {
