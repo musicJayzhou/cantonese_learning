@@ -63,5 +63,13 @@
 <script src="js/games.js"></script>
 <script src="js/phonics.js"></script>
 <script src="js/main.js"></script>
+<!-- Service Worker：媒体缓存（相对路径注册，双站自适应；注册失败静默降级，不影响功能） -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  });
+}
+</script>
 </body>
 </html>

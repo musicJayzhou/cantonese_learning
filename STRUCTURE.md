@@ -34,9 +34,12 @@
   - `organize-lesson-audio.py` — 第02/03堂：从 raw-materials 拷贝音频并重命名为 web 安全文件名
   - `organize-audio-20260817.py` — 第04–12堂+发音：批量整理音频（碰撞自动加字母、速度档归一）
   - `audit-assets.js` — 校验全部数据文件引用的音频/图片与磁盘一致（无缺失、无冗余）
+  - `test-sw.js` — sw.js 冒烟测试（node 模拟 SW 环境，验证 SWR / Range 206 / 离线回退）
 - `docs/` — 文档
   - `SUBMISSION-WORKFLOW.md` — 内容投稿与发布流程
 - `wrangler.jsonc` — Cloudflare Workers 部署配置（静态资源目录 = 仓库根目录）
+- `_headers` — Cloudflare 静态资产响应头（audio/img 1 天缓存、sw.js no-cache；GitHub Pages 忽略此文件）
+- `sw.js` — Service Worker：媒体（audio/img）SWR 缓存（ETag 条件重验证 + iOS Range 请求合成 206 + 250MB 配额自清），页面/JS/data network-first；注册失败静默降级
 - `.assetsignore` — wrangler 上传资产时的排除清单（node_modules / .git 等）
 - `.github/workflows/deploy-cloudflare.yml` — GitHub Actions 自动部署到 Cloudflare（push 即触发）
 - `.github/ISSUE_TEMPLATE/` — GitHub Issue 模板

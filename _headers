@@ -1,0 +1,14 @@
+# Cloudflare Workers 静态资产响应头（GitHub Pages 会忽略此文件，无害）
+# 文档：https://developers.cloudflare.com/workers/static-assets/headers/
+
+# 媒体：1 天 HTTP 缓存。Service Worker 已接管重复访问（SWR 自动更新），
+# 此 header 主要服务「SW 尚未安装的首次访问」和「iOS 媒体请求绕过 SW」的降级路径
+/audio/*
+  Cache-Control: public, max-age=86400
+
+/img/*
+  Cache-Control: public, max-age=86400
+
+# SW 脚本本身必须每次校验，保证新版本及时生效
+/sw.js
+  Cache-Control: no-cache
